@@ -49,10 +49,12 @@ class Commands():
         pass
 
 class PIP():
-    
+    """ Python wrapper for PIP installer """
+
     __version__ = '0.2'
     __author__ = 'Jordan Raychev'
     __email__ = 'jpraychev at gmail dot com'
+    __license__ = 'MIT' # To be implemented from file
 
     @property
     def version(self):
@@ -87,7 +89,6 @@ class PIP():
             package = Commands._install(pack_name=name)
         except subprocess.CalledProcessError:
             return f'{name} package does not exist\n'
-
         return package.stdout
 
     @staticmethod
@@ -100,10 +101,7 @@ class PIP():
             package = Commands._uninstall(pack_name=name)
         except Exception:
             return f'{name} could not be uninstalled'
-
-        if package.stdout:
-            return package.stdout
-        return package.stderr
+        return package.stdout if package.stdout else package.stderr
 
     def bulk_install(names:list) -> str:
         """ TO DO """
