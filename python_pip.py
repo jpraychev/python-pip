@@ -1,8 +1,5 @@
 import subprocess
 
-# # Main DOD contact
-# # FPA53 - non blue green updates
-
 class Commands():
     """ Class that specifies all PIP commands that are implemented
         For referece, please use pip --help """
@@ -48,17 +45,26 @@ class Commands():
         """ TO DO """
         pass
 
+    @classmethod
+    def _export(cls, file:str):
+        """ TO DO """
+        pass
+
 class PIP():
     """ Python wrapper for PIP installer """
 
     __version__ = '0.2'
     __author__ = 'Jordan Raychev'
     __email__ = 'jpraychev at gmail dot com'
-    __license__ = 'MIT' # To be implemented from file
+    __license__ = 'MIT. Please refer to LICENSE file'
 
     @property
     def version(self):
         return self.__version__
+
+    @property
+    def license(self):
+        return self.__license__
 
     def __str__(self):
         return 'A Python wrapper of the pip installer'
@@ -103,18 +109,27 @@ class PIP():
             return f'{name} could not be uninstalled'
         return package.stdout if package.stdout else package.stderr
 
-    def bulk_install(names:list) -> str:
+    @staticmethod
+    def bulk_install(names:list):
         """ TO DO """
         raise NotImplementedError
 
-    def _bulk_uninstall(names):
+    @staticmethod
+    def bulk_uninstall(names):
         """ TO DO """
         raise NotImplementedError
 
-    def _install_from_file(file):
+    @staticmethod
+    def install_from_file(file):
         """ TO DO """
         raise NotImplementedError
 
-    def _uninstall_from_file(file):
+    @staticmethod
+    def uninstall_from_file(file):
+        """ TO DO """
+        raise NotImplementedError
+
+    @staticmethod
+    def export(file):
         """ TO DO """
         raise NotImplementedError
