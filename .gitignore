@@ -1,3 +1,5 @@
 __pycache__
 venv
 main.py
+dist
+src/python_pip.egg-info/
