@@ -18,20 +18,20 @@ class Commands():
         return cls._create_cmd('pip', 'freeze')
     
     @classmethod
-    def _install(cls, pack_name:str):
-        return cls._create_cmd('pip', 'install', pack_name)
+    def _install(cls, name:str):
+        return cls._create_cmd('pip', 'install', name)
 
     @classmethod
-    def _uninstall(cls, pack_name:str):
-        return cls._create_cmd('pip', 'uninstall', pack_name, '-y')
+    def _uninstall(cls, name:str):
+        return cls._create_cmd('pip', 'uninstall', name, '-y')
 
     @classmethod
-    def _bulk_install(cls, pack_names:list):
+    def _bulk_install(cls, name:list):
         """ TO DO """
         pass
 
     @classmethod
-    def _bulk_uninstall(cls, pack_names:list):
+    def _bulk_uninstall(cls, name:list):
         """ TO DO """
         pass
 
@@ -72,50 +72,50 @@ class PIP():
     @staticmethod
     def list_packages(pretty=False):
         """ List all installed packages nicely formatted """
-        packs = dict()
-        packages = Commands._list_packages()
-        installed_packages = packages.stdout.split('\n')[:-1]
+        packages = dict()
+        lp = Commands._list_packages()
+        inst_packages = lp.stdout.split('\n')[:-1]
 
-        for package in installed_packages:
+        for package in inst_packages:
             name, version = package.split('==')[0], package.split('==')[1]
-            packs[name] = version
+            packages[name] = version
         
         if pretty:
             import json
-            return json.dumps(packs, sort_keys=True, indent=4)
-        return packs
+            return json.dumps(packages, sort_keys=True, indent=4)
+        return packages
 
     @staticmethod
-    def install(name:str) -> str:
+    def install(package_name:str) -> str:
         """ Install PIP package """
 
-        if not isinstance(name, str):
-            raise TypeError(f'Expected {name} to be a string')
+        if not isinstance(package_name, str):
+            raise TypeError(f'Expected {package_name} to be a string')
         try:
-            package = Commands._install(pack_name=name)
+            package = Commands._install(name=package_name)
         except subprocess.CalledProcessError:
-            return f'{name} package does not exist\n'
+            return f'{package_name} package does not exist\n'
         return package.stdout
 
     @staticmethod
-    def uninstall(name:str) -> str:
+    def uninstall(package_name:str) -> str:
         """ Uninstall PIP package """
 
-        if not isinstance(name, str):
-            raise TypeError(f'Expected {name} to be a string')
+        if not isinstance(package_name, str):
+            raise TypeError(f'Expected {package_name} to be a string')
         try:
-            package = Commands._uninstall(pack_name=name)
+            package = Commands._uninstall(name=package_name)
         except Exception:
-            return f'{name} could not be uninstalled'
+            return f'{package_name} could not be uninstalled'
         return package.stdout if package.stdout else package.stderr
 
     @staticmethod
-    def bulk_install(names:list):
+    def bulk_install(package_names:list):
         """ TO DO """
         raise NotImplementedError
 
     @staticmethod
-    def bulk_uninstall(names):
+    def bulk_uninstall(package_names):
         """ TO DO """
         raise NotImplementedError
 

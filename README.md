@@ -16,12 +16,27 @@
 
 ### 4. Install all required libraries
 ```
->>> pip install -r .\requirements.txt
+There are no requirements at the moment
 ```
 
 ### 5. Usage
 ```
-TO DO
+from python_pip import PIP
+```
+
+```
+# Initialize object
+pip = PIP()
+```
+
+```
+# Install a package
+pip.install(package_name='requests')
+```
+
+```
+# Uninstall a package
+pip.uninstall(package_name='requests')
 ```
 
 ## Contributing
