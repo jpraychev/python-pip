@@ -53,7 +53,7 @@ class Commands():
 class PIP():
     """ Python wrapper for PIP installer """
 
-    __version__ = '0.2'
+    __version__ = '0.23'
     __author__ = 'Jordan Raychev'
     __email__ = 'jpraychev at gmail dot com'
     __license__ = 'MIT. Please refer to LICENSE file'

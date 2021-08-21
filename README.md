@@ -2,7 +2,8 @@
 
 ## Installation
 ---
-### 1. Clone or download the repository
+### 1 pip install python-pip
+
 
 ### 2. Create a virtual environment
 ```
@@ -21,12 +22,13 @@ There are no requirements at the moment
 
 ### 5. Usage
 ```
-from python_pip import PIP
+from python_pip import pip
 ```
 
 ```
 # Initialize object
-pip = PIP()
+pip = pip.PIP()
+print(pip.version)
 ```
 
 ```
