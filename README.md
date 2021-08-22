@@ -2,17 +2,19 @@
 
 ## Installation
 ---
-### 1 pip install python-pip
-
+### 1. Install package from PyPi
+```
+pip install python-pip
+```
 
 ### 2. Create a virtual environment
 ```
->>> python -m venv venn
+python -m venv venn
 ```
 
 ### 3. Activate the virtual environment
 ```
->>> ./venv/Scripts/activate
+./venv/Scripts/activate
 ```
 
 ### 4. Install all required libraries
