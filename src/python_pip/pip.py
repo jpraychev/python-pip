@@ -1,4 +1,5 @@
 import subprocess
+from typing import List
 
 class Commands():
     """ Class that specifies all PIP commands that are implemented
@@ -26,9 +27,8 @@ class Commands():
         return cls._create_cmd('pip', 'uninstall', name, '-y')
 
     @classmethod
-    def _bulk_install(cls, name:list):
-        """ TO DO """
-        pass
+    def _bulk_install(cls, name:str):
+        return cls._install(name=name)
 
     @classmethod
     def _bulk_uninstall(cls, name:list):
@@ -94,7 +94,7 @@ class PIP():
         try:
             package = Commands._install(name=package_name)
         except subprocess.CalledProcessError:
-            return f'{package_name} package does not exist\n'
+            return f'{package_name} could not be installed\n'
         return package.stdout
 
     @staticmethod
@@ -110,9 +110,21 @@ class PIP():
         return package.stdout if package.stdout else package.stderr
 
     @staticmethod
-    def bulk_install(package_names:list):
-        """ TO DO """
-        raise NotImplementedError
+    def bulk_install(package_names:List[str]):
+        """ Bulk install of packages from a list """
+        success = []
+        failure = []
+        if not isinstance(package_names, list):
+            raise TypeError(f'Expected {package_names} to be a list of strings')
+        for package_name in package_names:
+            try:
+                package = Commands._bulk_install(name=package_name)
+            except subprocess.CalledProcessError as e:
+                failure.append(package_name)
+                break
+            success.append(package_name)
+        return f'Installed packages: {success}\nNot installed packages: {failure}'
+
 
     @staticmethod
     def bulk_uninstall(package_names):
