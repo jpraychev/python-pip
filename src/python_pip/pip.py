@@ -26,29 +26,6 @@ class Commands():
     def _uninstall(cls, name:str):
         return cls._create_cmd('pip', 'uninstall', name, '-y')
 
-    @classmethod
-    def _bulk_install(cls, name:str):
-        return cls._install(name=name)
-
-    @classmethod
-    def _bulk_uninstall(cls, name:list):
-        """ TO DO """
-        pass
-
-    @classmethod
-    def _install_from_file(cls, file:str):
-        """ TO DO """
-        pass
-
-    @classmethod
-    def _uninstall_from_file(cls, file:str):
-        """ TO DO """
-        pass
-
-    @classmethod
-    def _export(cls, file:str):
-        """ TO DO """
-        pass
 
 class PIP():
     """ Python wrapper for PIP installer """
@@ -118,7 +95,7 @@ class PIP():
             raise TypeError(f'Expected {package_names} to be a list of strings')
         for package_name in package_names:
             try:
-                package = Commands._bulk_install(name=package_name)
+                package = Commands._install(name=package_name)
             except subprocess.CalledProcessError as e:
                 failure.append(package_name)
                 break
@@ -127,21 +104,28 @@ class PIP():
 
 
     @staticmethod
-    def bulk_uninstall(package_names):
-        """ TO DO """
-        raise NotImplementedError
+    def bulk_uninstall(package_names:List[str]):
+        """ Bulk uninstall of packages from a list """
+        success = []
+        failure = []
+        if not isinstance(package_names, list):
+            raise TypeError(f'Expected {package_names} to be a list of strings')
+        for package_name in package_names:
+            try:
+                package = Commands._uninstall(name=package_name)
+            except Exception:
+                failure.append(package_name)
+                break
+            success.append(package_name)
+        return f'Uninstalled packages: {success}\nNot uninstalled packages: {failure}'
 
     @staticmethod
-    def install_from_file(file):
-        """ TO DO """
-        raise NotImplementedError
+    def export() -> None:
+        """ Exports installed packages in environment to requirements.txt """
 
-    @staticmethod
-    def uninstall_from_file(file):
-        """ TO DO """
-        raise NotImplementedError
+        lp = Commands._list_packages()
+        installed_packages = lp.stdout.split('\n')[:-1]
 
-    @staticmethod
-    def export(file):
-        """ TO DO """
-        raise NotImplementedError
+        with open(file='requirements.txt', mode='w') as file:
+            for package in installed_packages:
+                file.write(package + '\n')
