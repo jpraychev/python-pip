@@ -1,5 +1,5 @@
 import subprocess
-from typing import List
+from typing import List, Dict
 
 class Commands():
     """ Class that specifies all PIP commands that are implemented
@@ -30,7 +30,7 @@ class Commands():
 class PIP():
     """ Python wrapper for PIP installer """
 
-    __version__ = '0.24'
+    __version__ = '0.30'
     __author__ = 'Jordan Raychev'
     __email__ = 'jpraychev at gmail dot com'
     __license__ = 'MIT. Please refer to LICENSE file'
@@ -47,8 +47,10 @@ class PIP():
         return 'A Python wrapper of the pip installer'
 
     @staticmethod
-    def list_packages(pretty=False):
-        """ List all installed packages nicely formatted """
+    def list_packages(pretty=False) -> Dict:
+        """ List all installed packages. If pretty argument is set to True, 
+        formats the output with indent. """
+
         packages = dict()
         lp = Commands._list_packages()
         inst_packages = lp.stdout.split('\n')[:-1]
@@ -87,10 +89,12 @@ class PIP():
         return package.stdout if package.stdout else package.stderr
 
     @staticmethod
-    def bulk_install(package_names:List[str]):
+    def bulk_install(package_names:List[str]) -> str:
         """ Bulk install of packages from a list """
+
         success = []
         failure = []
+
         if not isinstance(package_names, list):
             raise TypeError(f'Expected {package_names} to be a list of strings')
         for package_name in package_names:
@@ -104,7 +108,7 @@ class PIP():
 
 
     @staticmethod
-    def bulk_uninstall(package_names:List[str]):
+    def bulk_uninstall(package_names:List[str]) -> str:
         """ Bulk uninstall of packages from a list """
         success = []
         failure = []
@@ -121,7 +125,7 @@ class PIP():
 
     @staticmethod
     def export() -> None:
-        """ Exports installed packages in environment to requirements.txt """
+        """ Exports installed packages to requirements.txt file """
 
         lp = Commands._list_packages()
         installed_packages = lp.stdout.split('\n')[:-1]
