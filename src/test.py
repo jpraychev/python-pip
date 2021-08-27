@@ -11,5 +11,10 @@ pip = pip.PIP()
 # Bulk uninstall
 
 # Export
+# export = pip.export()
+# print(export)
 
-export = pip.export()
+# Clear cache
+cache = pip.show_cache()
+print(cache)
+

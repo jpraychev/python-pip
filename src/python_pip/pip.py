@@ -26,6 +26,14 @@ class Commands():
     def _uninstall(cls, name:str):
         return cls._create_cmd('pip', 'uninstall', name, '-y')
 
+    @classmethod
+    def _clear_cache(cls):
+        return cls._create_cmd('pip', 'cache', 'purge')
+
+    @classmethod
+    def _show_cache(cls):
+        return cls._create_cmd('pip', 'cache', 'list')
+
 
 class PIP():
     """ Python wrapper for PIP installer """
@@ -72,7 +80,7 @@ class PIP():
             raise TypeError(f'Expected {package_name} to be a string')
         try:
             package = Commands._install(name=package_name)
-        except subprocess.CalledProcessError:
+        except Exception:
             return f'{package_name} could not be installed\n'
         return package.stdout
 
@@ -100,7 +108,7 @@ class PIP():
         for package_name in package_names:
             try:
                 package = Commands._install(name=package_name)
-            except subprocess.CalledProcessError as e:
+            except Exception:
                 failure.append(package_name)
                 break
             success.append(package_name)
@@ -130,6 +138,30 @@ class PIP():
         lp = Commands._list_packages()
         installed_packages = lp.stdout.split('\n')[:-1]
 
-        with open(file='requirements.txt', mode='w') as file:
-            for package in installed_packages:
-                file.write(package + '\n')
+        try:
+            with open(file='requirements.txt', mode='w') as file:
+                for package in installed_packages:
+                    file.write(package + '\n')
+        except Exception:
+            return 'Could not export python packages'
+        return 'Python packages exported to requirements.txt'
+
+    @staticmethod
+    def clear_cache():
+        """ Clears pip cache current environment """
+
+        try:
+            cache = Commands._clear_cache()
+        except Exception:
+            return 'Cache is probably empty. Please run show_cache to verify first.'
+        return cache.stdout
+    
+    @staticmethod
+    def show_cache():
+        """ Shows pip cache for current environment """
+
+        try:
+            cache = Commands._show_cache()
+        except Exception:
+            return 'Something went wrong'
+        return cache.stdout
