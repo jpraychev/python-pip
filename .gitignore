@@ -2,3 +2,5 @@ __pycache__
 venv
 dist
 src/python_pip.egg-info/
+src/tests/__pycache__
+.pytest_cache
