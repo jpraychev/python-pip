@@ -22,7 +22,7 @@ def uninstall_package(package):
     return pip.uninstall(package)
 
 def test_version():
-    assert pip.version == '0.33'
+    assert pip.version == '1.00'
 
 def test_package_list(package_list):
     """ If pip is installed, underlying pip freeze command that is used from 
