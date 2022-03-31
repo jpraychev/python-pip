@@ -23,7 +23,7 @@ def uninstall_package(package):
 
 def test_version():
     assert pip.version == '0.33'
-    
+
 def test_package_list(package_list):
     """ If pip is installed, underlying pip freeze command that is used from 
     list_packages() should return atleast one package """
@@ -36,7 +36,6 @@ def test_package_install_fail():
 
 def test_package_install(package_list):
     """ Test to install latest version of requests library """
-    """ Try to install latest version of requests """
     if not 'requests' in package_list:
         output = pip.install('requests')
         assert 'Successfully installed requests' in output
