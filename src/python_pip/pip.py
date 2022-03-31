@@ -1,5 +1,5 @@
 from typing import List, Dict
-from .commands import Commands
+from python_pip.commands import Commands
 
 class PIP():
     """ Python wrapper for PIP installer """
@@ -25,13 +25,22 @@ class PIP():
         """ List all installed packages. If pretty argument is set to True, 
         formats the output with indent. """
 
+        """ pip freeze command normal output follows the convention:
+        pytest==7.1.1
+        
+        If package is install via pip install . from the root dir, the output is
+        show below:
+        python-pip @ file:///D:/Personal%20Projects/python-pip
+        """
         packages = dict()
         lp = Commands._list_packages()
         inst_packages = lp.stdout.split('\n')[:-1]
 
         for package in inst_packages:
-            name, version = package.split('==')[0], package.split('==')[1]
-            packages[name] = version
+            """ Ignoring locally installed packages if @ is in package name """
+            if not '@' in package:
+                name, version = package.split('==')[0], package.split('==')[1]
+                packages[name] = version
         
         if pretty:
             import json
