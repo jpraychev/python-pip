@@ -48,6 +48,7 @@ def test_package_uninstall(package_list):
     """ Test to uninstall latest version of requests library """
     if 'requests' in package_list:
         output = uninstall_package('requests')
+        print(output)
         assert 'Successfully uninstalled requests' in output
     else:
         install_package('requests')
