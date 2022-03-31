@@ -38,7 +38,6 @@ def test_package_install(package_list):
     """ Test to install latest version of requests library """
     if not 'requests' in package_list:
         output = pip.install('requests')
-        print(output)
         assert 'Successfully installed requests' in output
     else:
         uninstall_package('requests')
@@ -49,7 +48,6 @@ def test_package_uninstall(package_list):
     """ Test to uninstall latest version of requests library """
     if 'requests' in package_list:
         output = uninstall_package('requests')
-        print(output)
         assert 'Successfully uninstalled requests' in output
     else:
         install_package('requests')
