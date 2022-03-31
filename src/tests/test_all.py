@@ -38,6 +38,7 @@ def test_package_install(package_list):
     """ Test to install latest version of requests library """
     if not 'requests' in package_list:
         output = pip.install('requests')
+        print(output)
         assert 'Successfully installed requests' in output
     else:
         uninstall_package('requests')
