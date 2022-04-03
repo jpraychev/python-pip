@@ -19,12 +19,27 @@ python -m venv venn
 ./venv/Scripts/activate
 ```
 
-### 4. Install all required libraries
+### 4. Running tests after installation
+```
+pip install -r requirements-tests.txt
+pytest
+```
+### Example output
+```
+=================== test session starts ===================
+platform win32 -- Python 3.9.2, pytest-7.1.1, pluggy-1.0.0
+rootdir: D:\Personal Projects\python-pip
+collected 6 items
+src\tests\test_all.py ...... [100%] 
+=================== 6 passed in 9.64s ===================
+```
+
+### 5. Install all required libraries
 ```
 There are no requirements at the moment
 ```
 
-### 5. Usage
+### 6. Usage
 ```
 from python_pip import pip
 ```
