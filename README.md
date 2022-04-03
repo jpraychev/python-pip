@@ -56,4 +56,4 @@ Email: jpraychev at gmail dot com
 Website: https://jraychev.com
 
 ## License
-See LICENSE file
+MIT. Please refer to LICENSE file

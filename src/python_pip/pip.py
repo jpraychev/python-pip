@@ -1,21 +1,22 @@
 from typing import List, Dict
 from python_pip.commands import Commands
 
+__package_name__ = 'python-pip'
+__version__ = '1.1'
+__author__ = 'Jordan Raychev'
+__author_email__ = 'jpraychev@gmail.com'
+__license__ = 'MIT. Please refer to LICENSE file'
+
 class PIP():
     """ Python wrapper for PIP installer """
 
-    __version__ = '1.00'
-    __author__ = 'Jordan Raychev'
-    __email__ = 'jpraychev at gmail dot com'
-    __license__ = 'MIT. Please refer to LICENSE file'
-
     @property
     def version(self):
-        return self.__version__
+        return __version__
 
     @property
     def license(self):
-        return self.__license__
+        return __license__
 
     def __str__(self):
         return 'A Python wrapper of the pip installer'
