@@ -2,7 +2,7 @@ from typing import List, Dict
 from python_pip.commands import Commands
 
 __package_name__ = 'python-pip'
-__version__ = '1.1'
+__version__ = '1.1.1'
 __author__ = 'Jordan Raychev'
 __author_email__ = 'jpraychev@gmail.com'
 __license__ = 'MIT. Please refer to LICENSE file'
