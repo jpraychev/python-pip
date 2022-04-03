@@ -2,6 +2,7 @@
 A thin wrapper around PIP which can be used at runtime.
 
 ![Run CI](https://github.com/jpraychev/python-pip/actions/workflows/CI.yml/badge.svg?branch=master)
+[![Publish to pypi](https://github.com/jpraychev/python-pip/actions/workflows/publish-pypi.yml/badge.svg)](https://github.com/jpraychev/python-pip/actions/workflows/publish-pypi.yml)
 ## Installation
 ---
 ### 1. Install package from PyPi
