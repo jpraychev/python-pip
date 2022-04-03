@@ -1,5 +1,6 @@
 # Python PIP Wrapper
-
+A thin wrapper around PIP which can be used at runtime.
+![CI ](https://github.com/jpraychev/python-pip/actions/workflows/CI.yml/badge.svg)
 ## Installation
 ---
 ### 1. Install package from PyPi
